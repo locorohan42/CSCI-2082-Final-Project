@@ -1,11 +1,13 @@
 package collection.classes;
 import java.util.EmptyStackException;
 
+import regular.classes.User;
+
 /*
  * Class is the data strucure used to store the symbols to find if an expression is balanced or unbalanced
  */
 
-public class LinkedStack<T> {
+public class UserStack<T> {
 
 	/*
 	 * Instance Variables
@@ -15,7 +17,7 @@ public class LinkedStack<T> {
 	/*
 	 * Constructor
 	 */
-	public LinkedStack() {
+	public UserStack() {
 		top = null;
 	}
 
@@ -91,6 +93,12 @@ public class LinkedStack<T> {
 
 		info += "  --- ";
 		return info;
+	}
+	public static void main(String[] args) {
+		UserStack<User> stack = new UserStack<User>();
+		User map = new User("John", "ha", "asdf");
+		stack.push(map);
+		System.out.println(stack.peek());
 	}
 
 }

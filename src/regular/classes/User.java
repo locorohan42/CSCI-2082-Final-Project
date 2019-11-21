@@ -1,11 +1,15 @@
 package regular.classes;
 import java.util.Date;
+import collection.classes.Photos;
 
 public class User {
 	private String id;
 	private String password;
 	private String email;
 	private Date creationDate;
+	
+	private Photos photoCollection;
+	
 	
 	public User(String id, String password, String email) {
 		this.id = id;
