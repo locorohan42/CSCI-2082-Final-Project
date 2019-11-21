@@ -3,6 +3,7 @@ package regular.classes;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -83,6 +84,7 @@ public class GUI extends JFrame{
 
 		private String username = null;
 		private String password = null;
+		private String email = null;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String callingBtn = e.getActionCommand();
@@ -93,15 +95,26 @@ public class GUI extends JFrame{
 			}
 			
 			else if(callingBtn.equals("Register")) {
-
+				email = new String(emailField.getText());
+				User createUser = new User(username, password, email); 
 			}
+			
+			/* needs id, pwd, email, creation date 
+			 *  private String id;
+				private String password;
+				private String email;
+				private Date creationDate;
+				//how to capture what is typed into gui box and then
+				 * create a new object of that "user" 
+			 */
+			
 			
 			else if(callingBtn.equals("Cancel")) {
 				System.exit(0);
 			}
 				
 			}
-		
+	
 		
 			
 		}
