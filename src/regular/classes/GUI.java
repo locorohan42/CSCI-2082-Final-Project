@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -16,6 +17,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame{
+	//IDK if we do the user stuff here but here is a list of users that we can use in the login page
+	ArrayList<User> userList;
+	
+	
 
 	private JFrame loginWindow = new JFrame();
 
@@ -23,6 +28,8 @@ public class GUI extends JFrame{
 	private JPanel registerPane;
 	private JTextField loginField;
 	private JPasswordField passwordField;
+	
+	private JTextField enterUserTxtField, enterEmailTxtField, createPasswordTxtField;
 
 	// Initialize GUI Components
 
@@ -39,6 +46,10 @@ public class GUI extends JFrame{
 	// New Class instances
 
 	public GUI() {
+		//Instantiate arrayList
+		userList = new ArrayList<>();
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginWindow.setResizable(false);
 		loginWindow.setTitle("Login");
@@ -94,12 +105,12 @@ public class GUI extends JFrame{
 		lblEnterEmail.setBounds(80, 110, 100, 20);
 		registerPane.add(lblEnterEmail);
 
-		JTextField enterUserTxtField = new JTextField();
+		enterUserTxtField = new JTextField();
 		enterUserTxtField.setBounds(190, 70, 100, 20);
 		registerPane.add(enterUserTxtField);
 		enterUserTxtField.setColumns(10);
 
-		JTextField enterEmailTxtField = new JTextField();
+		enterEmailTxtField = new JTextField();
 		enterEmailTxtField.setBounds(190, 110, 100, 20);
 		registerPane.add(enterEmailTxtField);
 		enterEmailTxtField.setColumns(10);
@@ -111,10 +122,11 @@ public class GUI extends JFrame{
 		JButton btnCreateUser = new JButton("Create User");
 		btnCreateUser.setBounds(200, 206, 110, 24);
 		registerPane.add(btnCreateUser);
+		btnCreateUser.addActionListener(new BtnListener());
 
-		JPasswordField createPasswordField = new JPasswordField();
-		createPasswordField.setBounds(190, 150, 100, 20);
-		registerPane.add(createPasswordField);
+		createPasswordTxtField = new JPasswordField();
+		createPasswordTxtField.setBounds(190, 150, 100, 20);
+		registerPane.add(createPasswordTxtField);
 		
 		// Tabs 
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -149,6 +161,7 @@ public class GUI extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			//System.out.println("EVENT HAPPENED");
 			String callingBtn = e.getActionCommand();
 			CardLayout cardlayout = new CardLayout();
 			
@@ -196,7 +209,57 @@ public class GUI extends JFrame{
 			else if (callingBtn.equals("Create User")) {
 
 //				email = new String(emailField.getText());
-				User createUser = new User(username, password, email);
+				//	private JTextField enterUserTxtField, enterEmailTxtField, createPasswordTxtField;
+				String username = enterUserTxtField.getText();
+				boolean flag = false;
+				
+				if(username.equals("")) {
+					System.out.println("Username cannot be empty");
+					flag = true;
+				}
+				
+				String email = enterEmailTxtField.getText();
+				if(email.equals("")) {
+					System.out.println("Email cannot be empty");
+					flag = true;
+				}
+				else if(!email.contains(".") || !email.contains("@")) {
+					System.out.println("Email must be valid");
+					flag = true;
+				}
+				
+				String pass = createPasswordTxtField.getText();
+				if(pass.equals("")) {
+					System.out.println("Password cannot be empty");
+					flag = true;
+				}
+				
+				//Passed all input validation cases, create user and add
+				if(!flag) {
+					User u = new User(username, pass, email);
+					
+					//Check against duplicates
+					boolean dupeFlag = false;
+					for(int i = 0; i < userList.size(); i++) {
+						User temp = userList.get(i);
+						if(temp.getId().equals(u.getId())) {
+							System.out.println("Users cannot have the same ID");
+							dupeFlag = true;
+						}
+						if(temp.getEmail().equals(u.getEmail())) {
+							System.out.println("Users cannot have the same password");
+							dupeFlag = true;
+						}
+					}
+					if(dupeFlag) { //Duplicate user detected
+						return;
+					}
+					
+					System.out.println("User successfully added!");
+					System.out.println(u);
+					userList.add(u);
+				}
+				
 			}
 
 			/*
