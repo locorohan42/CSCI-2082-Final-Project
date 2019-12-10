@@ -61,7 +61,7 @@ public class GUI extends JFrame{
 
 		// Login Pane Components
 		JPanel loginPane = new JPanel();
-		contentPane.add(loginPane, "login");
+//		contentPane.add(loginPane, "login");
 		loginPane.setLayout(null);
 
 		JLabel lblUsername = new JLabel("Username");
@@ -94,7 +94,7 @@ public class GUI extends JFrame{
 		// Register Pane Components
 		JPanel registerPane = new JPanel();
 		registerPane = new JPanel();
-		contentPane.add(registerPane, "register");
+//		contentPane.add(registerPane, "register");
 		registerPane.setLayout(null);
 
 		JLabel lblEnterUsername = new JLabel("Enter Username");
@@ -141,15 +141,16 @@ public class GUI extends JFrame{
 	}
 
 	private class mainWindow extends JFrame {
+		private JFrame mainWindow;
 
 		public mainWindow() {
-			setResizable(true);
-			setTitle("PhotosApplication");
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 1350, 900);
+			mainWindow.setResizable(true);
+			mainWindow.setTitle("PhotosApplication");
+			mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			mainWindow.setBounds(100, 100, 1350, 900);
 			contentPane = new JPanel();
 			contentPane.setLayout(null);
-			setContentPane(contentPane);
+			mainWindow.setContentPane(contentPane);
 		}
 	}
 
@@ -169,7 +170,7 @@ public class GUI extends JFrame{
 			if (callingBtn.equals("Login")) {
 				
 				try {
-					File file = new File("\\loginInfo.txt");
+					File file = new File("/CSCI 2082 Final Project/loginInfo.txt");
 					Scanner scan = new Scanner(file);
 					String line = null;
 					FileWriter fileWrite = new FileWriter(file, true);
