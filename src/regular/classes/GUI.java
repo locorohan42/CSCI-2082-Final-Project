@@ -16,9 +16,12 @@ import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import collection.classes.UserStack;
+
 public class GUI extends JFrame{
 	//IDK if we do the user stuff here but here is a list of users that we can use in the login page
-	ArrayList<User> userList;
+	UserStack<User> userList = new UserStack<User>();
+	
 	
 	
 
@@ -47,7 +50,7 @@ public class GUI extends JFrame{
 
 	public GUI() {
 		//Instantiate arrayList
-		userList = new ArrayList<>();
+		//userList = new ArrayList<>();
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -226,26 +229,12 @@ public class GUI extends JFrame{
 				if(!flag) {
 					User u = new User(username, pass, email);
 					
-					//Check against duplicates
-					boolean dupeFlag = false;
-					for(int i = 0; i < userList.size(); i++) {
-						User temp = userList.get(i);
-						if(temp.getId().equals(u.getId())) {
-							System.out.println("Users cannot have the same ID");
-							dupeFlag = true;
-						}
-						if(temp.getEmail().equals(u.getEmail())) {
-							System.out.println("Users cannot have the same password");
-							dupeFlag = true;
-						}
-					}
-					if(dupeFlag) { //Duplicate user detected
-						return;
-					}
+
 					
 					System.out.println("User successfully added!");
 					System.out.println(u);
-					userList.add(u);
+					userList.push(u);
+
 				}
 				
 			}
