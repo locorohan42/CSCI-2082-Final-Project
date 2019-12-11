@@ -15,7 +15,6 @@ public class User {
 		this.id = id;
 		this.password = password;
 		this.email = email;
-		this.creationDate = getCreationDate();
 	}
 
 	public String getId() {

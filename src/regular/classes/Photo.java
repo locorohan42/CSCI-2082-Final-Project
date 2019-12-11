@@ -13,6 +13,10 @@ public class Photo {
 		this.datePosted = getDatePosted();
 		photoIncrement++;
 	}
+	
+	public Photo(String imagePath) {
+		this.imagePath = imagePath;
+	}
 
 	public int getPhotoNumber() {
 		return photoNumber;
