@@ -140,19 +140,6 @@ public class GUI extends JFrame{
 
 	}
 
-	private class mainWindow extends JFrame {
-		private JFrame mainWindow;
-
-		public mainWindow() {
-			mainWindow.setResizable(true);
-			mainWindow.setTitle("PhotosApplication");
-			mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			mainWindow.setBounds(100, 100, 1350, 900);
-			contentPane = new JPanel();
-			contentPane.setLayout(null);
-			mainWindow.setContentPane(contentPane);
-		}
-	}
 
 	private class BtnListener implements ActionListener {
 
@@ -170,7 +157,7 @@ public class GUI extends JFrame{
 			if (callingBtn.equals("Login")) {
 				
 				try {
-					File file = new File("/CSCI 2082 Final Project/loginInfo.txt");
+					File file = new File("src/loginInfo.txt");
 					Scanner scan = new Scanner(file);
 					String line = null;
 					FileWriter fileWrite = new FileWriter(file, true);
@@ -208,7 +195,7 @@ public class GUI extends JFrame{
 			}
 
 			else if (callingBtn.equals("Create User")) {
-
+				
 //				email = new String(emailField.getText());
 				//	private JTextField enterUserTxtField, enterEmailTxtField, createPasswordTxtField;
 				String username = enterUserTxtField.getText();
