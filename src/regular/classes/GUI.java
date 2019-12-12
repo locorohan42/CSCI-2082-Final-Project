@@ -3,6 +3,7 @@ package regular.classes;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -68,29 +69,35 @@ public class GUI extends JFrame{
 		loginPane.setLayout(null);
 
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(80, 70, 80, 20);
+		lblUsername.setBounds(80, 150, 80, 20);
 		loginPane.add(lblUsername);
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(80, 110, 80, 20);
+		lblPassword.setBounds(80, 190, 80, 20);
 		loginPane.add(lblPassword);
 
 		loginField = new JTextField();
-		loginField.setBounds(164, 70, 100, 20);
+		loginField.setBounds(164, 150, 100, 20);
 		loginPane.add(loginField);
 		loginField.setColumns(10);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(164, 110, 100, 20);
+		passwordField.setBounds(164, 190, 100, 20);
 		loginPane.add(passwordField);
 
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(175, 170, 90, 24);
+		btnLogin.setBounds(80, 230, 130, 34);
+		btnLogin.setToolTipText("Login");
+		Image login = new ImageIcon(this.getClass().getResource("/right.png")).getImage();
+		btnLogin.setIcon(new ImageIcon(login));
 		loginPane.add(btnLogin);
 		btnLogin.addActionListener(new BtnListener());
 
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(270, 170, 90, 24);
+		btnCancel.setBounds(220, 230, 130, 34);
+		btnCancel.setToolTipText("Cancel");
+		Image cancel = new ImageIcon(this.getClass().getResource("/x-button.png")).getImage();
+		btnCancel.setIcon(new ImageIcon(cancel));
 		loginPane.add(btnCancel);
 		btnCancel.addActionListener(new BtnListener());
 
@@ -123,7 +130,10 @@ public class GUI extends JFrame{
 		registerPane.add(lblCreatePassword);
 
 		JButton btnCreateUser = new JButton("Create User");
-		btnCreateUser.setBounds(200, 206, 110, 24);
+		btnCreateUser.setBounds(140, 205, 150, 34);
+		btnCreateUser.setToolTipText("Cancel");
+		Image confirm = new ImageIcon(this.getClass().getResource("/confirm.png")).getImage();
+		btnCreateUser.setIcon(new ImageIcon(confirm));
 		registerPane.add(btnCreateUser);
 		btnCreateUser.addActionListener(new BtnListener());
 
@@ -136,6 +146,12 @@ public class GUI extends JFrame{
 		
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		tabbedPane.addTab("Login", loginPane);
+		
+		JLabel keyIcon = new JLabel("");
+		keyIcon.setBounds(10, 11, 128, 128);
+		Image keyImage = new ImageIcon(this.getClass().getResource("/key.png")).getImage();
+		keyIcon.setIcon(new ImageIcon(keyImage));
+		loginPane.add(keyIcon);
 		tabbedPane.addTab("Register", registerPane);
 
 		JFrame mainWindow = new JFrame();
@@ -180,7 +196,7 @@ public class GUI extends JFrame{
 							loginWindow.dispose();
 
 						} else if(username.equals("") && password.equals("")){
-							JOptionPane.showMessageDialog(contentPane, "Please enter Username and Passwors");
+							JOptionPane.showMessageDialog(contentPane, "Please enter Username and Password");
 						}
 						
 						else {
@@ -205,23 +221,27 @@ public class GUI extends JFrame{
 				boolean flag = false;
 				
 				if(username.equals("")) {
-					System.out.println("Username cannot be empty");
+					JOptionPane.showMessageDialog(contentPane, "Username cannot be empty");
+
 					flag = true;
 				}
 				
 				String email = enterEmailTxtField.getText();
 				if(email.equals("")) {
-					System.out.println("Email cannot be empty");
+					JOptionPane.showMessageDialog(contentPane, "Email cannot be empty");
+
 					flag = true;
 				}
 				else if(!email.contains(".") || !email.contains("@")) {
-					System.out.println("Email must be valid");
+					JOptionPane.showMessageDialog(contentPane, "Email Must be valid");
+
 					flag = true;
 				}
 				
 				String pass = createPasswordTxtField.getText();
 				if(pass.equals("")) {
-					System.out.println("Password cannot be empty");
+					JOptionPane.showMessageDialog(contentPane, "Password cannot be empty");
+
 					flag = true;
 				}
 				
@@ -229,9 +249,9 @@ public class GUI extends JFrame{
 				if(!flag) {
 					User u = new User(username, pass, email);
 					
-
+					JOptionPane.showMessageDialog(contentPane, "User Successfully added!");
 					
-					System.out.println("User successfully added!");
+
 					System.out.println(u);
 					userList.push(u);
 

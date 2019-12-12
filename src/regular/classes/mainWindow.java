@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import javax.swing.*;
+import java.awt.Component;
 
 @SuppressWarnings("serial")
 public class mainWindow extends JFrame {
@@ -43,7 +45,6 @@ public class mainWindow extends JFrame {
 	private JLabel lblMyPhotos;
 	private JList list;
 	private JScrollPane scrollPane;
-	private JList list_1;
 	// End of variables declaration//GEN-END:variables
 
 	/**
@@ -61,6 +62,7 @@ public class mainWindow extends JFrame {
 		sidePanel.setLayout(new BorderLayout(0, 0));
 		
 		lblMyPhotos = new JLabel("My Photos");
+		lblMyPhotos.setHorizontalAlignment(SwingConstants.CENTER);
 		sidePanel.add(lblMyPhotos, BorderLayout.NORTH);
 		
 		scrollPane = new JScrollPane();
@@ -80,6 +82,7 @@ public class mainWindow extends JFrame {
 		// setBorder(javax.swing.BorderFactory.createEtchedBorder());
 		setBackground(Color.GRAY);
 		picLabel = new JLabel(); // Create the Label to display the picture
+		picLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		picLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		picLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		
@@ -88,9 +91,14 @@ public class mainWindow extends JFrame {
 		vbox.add(Box.createVerticalStrut(30));
 		vbox.add(picLabel);
 		vbox.add(Box.createVerticalStrut(50));
-		getContentPane().add(vbox);
+		getContentPane().add(vbox, BorderLayout.CENTER);
+		
 		PreviousButton = new JButton();
-		PreviousButton.setText("Previous");
+		PreviousButton.setToolTipText("Previous");
+		PreviousButton.setText("");
+		Image prevArrow = new ImageIcon(this.getClass().getResource("/left-arrow.png")).getImage();
+		
+		PreviousButton.setIcon(new ImageIcon(prevArrow));
 		PreviousButton.setIconTextGap(10); // Distance between the icon and text is 10
 		PreviousButton.addActionListener(new ActionListener() { 
 																				
@@ -99,8 +107,13 @@ public class mainWindow extends JFrame {
 			}
 		});
 		NextButton = new JButton();
+		NextButton.setBackground(new Color(240, 240, 240));
+		NextButton.setToolTipText("Next");
 		NextButton.setPreferredSize(PreviousButton.getPreferredSize());
-		NextButton.setText("Next");
+		NextButton.setText("");
+		Image nextArrow = new ImageIcon(this.getClass().getResource("/right-arrow.png")).getImage();
+		
+		NextButton.setIcon(new ImageIcon(nextArrow));
 		NextButton.setHorizontalTextPosition(SwingConstants.LEFT);
 		NextButton.setIconTextGap(10); // Distance between the icon and text is 10
 		NextButton.addActionListener(new ActionListener() { 
@@ -162,20 +175,10 @@ public class mainWindow extends JFrame {
 	 */
 	public static void main(String args[]) {
 		/*
-		 * Set the Nimbus look and feel
-		 */
-		/*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-		 * look and feel. For details see
-		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+		 * Set the look and feel of the window
 		 */
 		try {
-			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -192,7 +195,7 @@ public class mainWindow extends JFrame {
 		/*
 		 * Create and display the form
 		 */
-		java.awt.EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new mainWindow().setVisible(true);
 			}
