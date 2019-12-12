@@ -175,43 +175,26 @@ public class GUI extends JFrame{
 
 			if (callingBtn.equals("Login")) {
 				
-				try {
-					File file = new File("src/loginInfo.txt");
-					Scanner scan = new Scanner(file);
-					String line = null;
-					FileWriter fileWrite = new FileWriter(file, true);
-					
-					String userTxt = " ";
-					String passTxt = " ";
-					
-					while (scan.hasNext()) {
-						userTxt = scan.nextLine();
-						passTxt = scan.nextLine();
+				username = loginField.getText();
+				password = new String(passwordField.getPassword());
 						
-						if (username.equals(userTxt) && password.equals(passTxt)) {
+						if (username.equals("Rohan43") && password.equals("pass")) {
 							JOptionPane.showMessageDialog(contentPane, "Login Successful!");
 							mainWindow window = new mainWindow();
 							window.setVisible(true);
 							loginWindow.setVisible(false);
 							loginWindow.dispose();
+							username = loginField.getText();
+							password = new String(passwordField.getPassword());
 
-						} else if(username.equals("") && password.equals("")){
-							JOptionPane.showMessageDialog(contentPane, "Please enter Username and Password");
-						}
-						
-						else {
-							JOptionPane.showMessageDialog(contentPane, "Username or password is incorrect");
-						}
+						} 
 						
 					}
-				} catch (IOException d){
-					d.printStackTrace();
-				}
+				 
 				
-				username = loginField.getText();
-				password = new String(passwordField.getPassword());
+				
 
-			}
+			
 
 			else if (callingBtn.equals("Create User")) {
 				
